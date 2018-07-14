@@ -47,6 +47,11 @@ function getTable($inputWord)
 
 //get query
 if (isset($_GET['s'])) {
-    $inputWord = strtolower($_GET['s']);
+    $inputWord = $_GET['s'];
+
+    if (getTable($inputWord) == "en2sn") {
+        $inputWord = strtolower($inputWord);
+    } 
+    
     echo (findMeanings($inputWord));
 }
