@@ -15,7 +15,7 @@ function suggestWords() {
         $('#listTitle').text("Suggestions");
 
         //send get request & get words (0 response = null)
-        $.get('./php/suggest.php?s=' + inputWord, function (data) {
+        $.get('./suggest.php?s=' + inputWord, function (data) {
             if (data !== '0') {
                 addToList(inputWord, data, 'suggest');
                 $('#welcomePanel').hide();
@@ -38,7 +38,7 @@ function findMeaning(inputWord) {
     $('#listTitle').text("Definitions");
     $('#inputWord').val(inputWord);
     //send get request & get meanings
-    $.get('./php/find.php?s=' + inputWord, function (data) {
+    $.get('./find.php?s=' + inputWord, function (data) {
         addToList(inputWord, data, 'meaning');
     });
 }
@@ -57,7 +57,7 @@ function addToList(inputWord, data, type) {
 }
 
 function getWordCount() {
-    $.get('./php/count.php', function (data) {
+    $.get('./count.php', function (data) {
         $('#wordCount').text(data);
     });
 }

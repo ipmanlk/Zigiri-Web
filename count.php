@@ -1,6 +1,6 @@
 <?php
 $wordCount = 0;
-require_once './config.php';
+require_once './setup/config.php';
 
 $sql = "SELECT word FROM en2sn";
 if ($result = mysqli_query($link, $sql)) {
