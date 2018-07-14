@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "Malithi-Web";
+    src: url(../webfonts/malithi_web.ttf);
+    font-weight: normal !important;
+
+}
+
+.sinhala {
+    font-family: "Malithi-Web" !important;
+    font-size: 18px;
+}
+
