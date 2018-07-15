@@ -1,5 +1,5 @@
 ﻿<?php
-header("Content-Type: text/html;charset=UTF-8");
+header('Access-Control-Allow-Origin: *');
 
 function findMeanings($inputWord)
 //find meanings from input word
