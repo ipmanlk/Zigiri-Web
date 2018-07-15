@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/fontawesome.css">
     <link rel="stylesheet" href="./css/custom.css">
     <script src="./js/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </head>
 
 <body>
@@ -46,14 +47,53 @@
 
             <div class="panel-body">
                 <center>
-                    <b>
-                        <h4>Zigiri Dictionary can detect your input language automatically.</h4>
-                        <h4>Currently has over
-                            <span id="wordCount"> </span> words.</h4>
-                    </b>
+                    <h4>Zigiri Dictionary can detect your input language automatically.</h4>
+                    <h4>Currently has over
+                        <span id="wordCount"> </span> words.</h4>
                 </center>
             </div>
         </div>
+
+        <div id="apiPanel" class="panel panel-default" style="margin-top: 20px; display: none;">
+
+            <div class="panel-heading">API</div>
+            <div class="panel-body">
+                <ul>
+                    <li>Send a get request to
+                        <b>https://www.zigiriweb.navinda.xyz/find/
+                            <i>YOUR_WORD</i>
+                        </b>.</li>
+                    <li>It will send back the meanings as a response.</li>
+                    <li>Response is a JSON encoded string.</li>
+                    <li>Input language will be detected automatically.</li>
+                </ul>
+
+
+                <pre class="prettyprint">
+                    <code spellcheck="false">
+                        //send a get request to find the Sinhala definition of the English word 'rapid'.
+                        $.get("https://www.zigiriweb.navinda.xyz/find/rapid", function (data, status) {
+                
+                            //parse json string from the server
+                            let meanings = JSON.parse(data);
+                            
+                            //print meanings
+                            for (item in meanings) {
+                                console.log(meanings[item]);
+                            }
+                        });
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <center>
+            <p>
+                <a href="#" id="apiBtn">API</a>
+            </p>
+        </center>
     </div>
 
     <!-- main js -->
