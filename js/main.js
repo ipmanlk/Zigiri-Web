@@ -2,6 +2,7 @@ $(window).on("load", function () {
     getWordCount();
     $('#inputWord').focus();
     $('#inputWord').keyup(function () {
+        $('#apiPanel').hide();
         suggestWords();
     });
 });
@@ -10,7 +11,6 @@ function suggestWords() {
     //suggest words on key up
 
     var inputWord = $('#inputWord').val().trim();
-
     if (!isEmpty(inputWord)) {
         $('#listTitle').text("Suggestions");
 
@@ -25,7 +25,6 @@ function suggestWords() {
                 $("#listItems").empty();
                 $("#listItems").append('<a href="#" class="list-group-item sinhala">' + "Sorry!. '" + inputWord + "' is not included in our database at the moment." + '</a>');
             }
-
         });
     } else {
         $('#list').hide();
@@ -70,3 +69,9 @@ function isEmpty(val) {
         return true;
     }
 }
+
+$('#apiBtn').click(function() {
+    $('#list').hide();
+    $('#welcomePanel').hide();
+    $('#apiPanel').fadeIn();
+}); 
