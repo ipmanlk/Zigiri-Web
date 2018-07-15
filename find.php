@@ -17,7 +17,7 @@ function findMeanings($inputWord)
     } else {
         $stmt = mysqli_prepare($link, "SELECT meanings FROM sn2en WHERE word=?");
     }
-
+    
     mysqli_stmt_bind_param($stmt, "s", $inputWord);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $result);
@@ -37,7 +37,7 @@ function findMeanings($inputWord)
 function getTable($inputWord)
 // select db table using input word's language
 {
-    if (!preg_match('/[^A-Za-z0-9\w]/', $inputWord)) {
+    if (!preg_match('/[^A-Za-z0-9-.]/', $inputWord)) {
         //if input is english
         return ("en2sn");
     } else {

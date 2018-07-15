@@ -44,7 +44,7 @@ function suggestWords($inputWord)
 function getTable($inputWord)
 // select db table using input word's language
 {
-    if (!preg_match('/[^A-Za-z0-9\w]/', $inputWord)) {
+    if (!preg_match('/[^A-Za-z0-9-.]/', $inputWord)) {
         //if input is english
         return ("en2sn");
     } else {
