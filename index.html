@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="./css/metro-bootstrap.min.css">
     <link rel="stylesheet" href="./css/fontawesome.css">
     <link rel="stylesheet" href="./css/custom.css">
-    <script src="./js/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </head>
 
 <body>
@@ -68,22 +66,9 @@
                     <li>Input language will be detected automatically.</li>
                 </ul>
 
-
-                <pre class="prettyprint">
-                    <code spellcheck="false">
-                        //send a get request to find the Sinhala definition of the English word 'rapid'.
-                        $.get("https://www.zigiriweb.navinda.xyz/find/rapid", function (data, status) {
-                
-                            //parse json string from the server
-                            let meanings = JSON.parse(data);
-                            
-                            //print meanings
-                            for (item in meanings) {
-                                console.log(meanings[item]);
-                            }
-                        });
-                    </code>
-                </pre>
+                <h5>Example using JavaScript (Fetch API)</h5>
+                <p data-height="320" data-theme-id="dark" data-slug-hash="ajdyrR" data-default-tab="js,result" data-user="ipman98" data-embed-version="2" data-pen-title="Example using JavaScript (Fetch API)" class="codepen">See the Pen <a href="https://codepen.io/ipman98/pen/ajdyrR/">Example using JavaScript (Fetch API)</a> by Navinda Dissanayake (<a href="https://codepen.io/ipman98">@ipman98</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
             </div>
         </div>
     </div>
@@ -96,6 +81,8 @@
         </center>
     </div>
 
+    <!-- js -->
+    <script src="./js/jquery.min.js"></script>
     <!-- main js -->
     <script src="./js/main.js"></script>
 </body>
