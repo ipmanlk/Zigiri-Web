@@ -2,89 +2,89 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Navinda Pramod Dissanayake">
-    <meta name="description" content="Contains over 100000 definitions. Translate from English to Sinhala and vice versa. Supports automatic input language detection and no annoying ads.">
-    <meta name="keywords" content="english, sinhala, dictionary, online, language, translator, madura, zigiri, zigiri dictionary,  Sinhala dictionary, Sinhala translator, Sinhala to English, Sri Lanka, Lanka, India, Kapruka, bhasha dictionary, bhasha sinhala dictionary, android dictionary, web dictionary">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Zigiri English Sinhala Dictionary Online</title>
-    <link rel="stylesheet" href="./css/metro-bootstrap.min.css">
-    <link rel="stylesheet" href="./css/fontawesome.css">
-    <link rel="stylesheet" href="./css/custom.css">
+  <meta charset="UTF-8">
+  <meta name="author" content="Navinda Pramod Dissanayake">
+  <meta name="description" content="Contains over 100000 definitions. Translate from English to Sinhala and vice versa. Supports automatic input language detection and no annoying ads.">
+  <meta name="keywords" content="english, sinhala, dictionary, online, language, translator, madura, zigiri, zigiri dictionary,  Sinhala dictionary, Sinhala translator, Sinhala to English, Sri Lanka, Lanka, India, Kapruka, bhasha dictionary, bhasha sinhala dictionary, android dictionary, web dictionary">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Zigiri English Sinhala Dictionary Online</title>
+  <link rel="stylesheet" href="./css/metro-bootstrap.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.css">
+  <link rel="stylesheet" href="./css/custom.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="page-header">
-            <h1>
-                Zigiri Dictionary
-                <small>Online</small>
-            </h1>
+  <div class="container">
+    <div class="page-header">
+      <h1>
+        Zigiri Dictionary
+        <small>Online</small>
+      </h1>
+    </div>
+    <form>
+      <div class="input-group input-group-lg">
+        <input id="inputWord" type="text" class="form-control input-lg" placeholder="Type here....">
+        <span class="input-group-addon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </form>
+
+    <div id="list" class="list-group" style="margin-top: 20px; display: none;">
+      <span class="list-group-item active">
+        <h3 id="listTitle" class="list-group-item-heading">Definitions</h4>
+        </span>
+        <div id="listItems" class="pre-scrollable">
+
         </div>
-        <form>
-            <div class="input-group input-group-lg">
-                <input id="inputWord" type="text" class="form-control input-lg" placeholder="Type here....">
-                <span class="input-group-addon">
-                    <i class="fas fa-search"></i>
-                </span>
-            </div>
-        </form>
-
-        <div id="list" class="list-group" style="margin-top: 20px; display: none;">
-            <span class="list-group-item active">
-                <h3 id="listTitle" class="list-group-item-heading">Definitions</h4>
-            </span>
-            <div id="listItems" class="pre-scrollable">
-
-            </div>
-        </div>
+      </div>
 
 
-        <div id="welcomePanel" class="panel panel-default" style="margin-top: 20px;">
+      <div id="welcomePanel" class="panel panel-default" style="margin-top: 20px;">
 
-            <div class="panel-body">
-                <center>
-                    <h4>Zigiri Dictionary can detect your input language automatically.</h4>
-                    <h4>Currently has over
-                        <span id="wordCount"> </span> words.</h4>
-                </center>
-            </div>
+        <div class="panel-body">
+          <center>
+            <h4>Zigiri Dictionary can detect your input language automatically.</h4>
+            <h4>Currently has over
+              <span id="wordCount"> </span> words.</h4>
+            </center>
+          </div>
         </div>
 
         <div id="apiPanel" class="panel panel-default" style="margin-top: 20px; display: none;">
 
-            <div class="panel-heading">API</div>
-            <div class="panel-body">
-                <ul>
-                    <li>Send a get request to
-                        <b>https://www.zigiriweb.navinda.xyz/find/
-                            <i>YOUR_WORD</i>
-                        </b>.</li>
-                    <li>It will send back the meanings as a response.</li>
-                    <li>Response is a JSON encoded string.</li>
-                    <li>Input language will be detected automatically.</li>
-                </ul>
+          <div class="panel-heading">API</div>
+          <div class="panel-body">
+            <ul>
+              <li>Send a get request to
+                <b>https://www.zigiriweb.navinda.xyz/find/
+                  <i>YOUR_WORD</i>
+                </b>.</li>
+                <li>It will send back the meanings as a response.</li>
+                <li>Response is a JSON encoded string.</li>
+                <li>Input language will be detected automatically.</li>
+              </ul>
 
-                <h5>Example using JavaScript (Fetch API)</h5>
-                <p data-height="320" data-theme-id="dark" data-slug-hash="ajdyrR" data-default-tab="js,result" data-user="ipman98" data-embed-version="2" data-pen-title="Example using JavaScript (Fetch API)" class="codepen">See the Pen <a href="https://codepen.io/ipman98/pen/ajdyrR/">Example using JavaScript (Fetch API)</a> by Navinda Dissanayake (<a href="https://codepen.io/ipman98">@ipman98</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-                <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+              <h5>Example using JavaScript (Fetch API)</h5>
+              <p data-height="320" data-theme-id="dark" data-slug-hash="ajdyrR" data-default-tab="js,result" data-user="ipman98" data-embed-version="2" data-pen-title="Example using JavaScript (Fetch API)" class="codepen">See the Pen <a href="https://codepen.io/ipman98/pen/ajdyrR/">Example using JavaScript (Fetch API)</a> by Navinda Dissanayake (<a href="https://codepen.io/ipman98">@ipman98</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+              <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
             </div>
+          </div>
         </div>
-    </div>
 
-    <div class="footer">
-        <center>
+        <div class="footer">
+          <center>
             <p>
-                <a href="#" id="apiBtn">API</a>
+              <a href="#" id="apiBtn">API</a>
             </p>
-        </center>
-    </div>
+          </center>
+        </div>
 
-    <!-- js -->
-    <script src="./js/jquery.min.js"></script>
-    <!-- main js -->
-    <script src="./js/main.js"></script>
-</body>
+        <!-- js -->
+        <script src="./js/jquery.min.js"></script>
+        <!-- main js -->
+        <script src="./js/main.js"></script>
+      </body>
 
-</html>
+      </html>
