@@ -124,27 +124,33 @@ function _elem(id) {
 
 	this.fadeIn = function () {
 
-		el.style.opacity = 0;
-		el.style.display = "block";
+        if (el.style.display !== "block") {
+            
+            el.style.opacity = 0;
+            el.style.display = "block";
+    
+            (function fade() {
+                var val = parseFloat(el.style.opacity);
+                if (!((val += .1) > 1)) {
+                    el.style.opacity = val;
+                    setTimeout(fade, 40);
+                }
+            })();
+        }
 
-		(function fade() {
-			var val = parseFloat(el.style.opacity);
-			if (!((val += .1) > 1)) {
-				el.style.opacity = val;
-				setTimeout(fade, 40);
-			}
-		})();
 	}
 
 	this.fadeOut = function () {
-		el.style.opacity = 1;
-		(function fade() {
-			if ((el.style.opacity -= .1) < 0) {
-				el.style.display = "none";
-			} else {
-				setTimeout(fade, 40);
-			}
-		})();
+        if (el.style.display !== "none") {
+            el.style.opacity = 1;
+            (function fade() {
+                if ((el.style.opacity -= .1) < 0) {
+                    el.style.display = "none";
+                } else {
+                    setTimeout(fade, 40);
+                }
+            })();
+        }
 	}
 
 	this.hide = function () {
