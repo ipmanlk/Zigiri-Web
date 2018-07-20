@@ -1,77 +1,173 @@
-$(window).on("load", function () {
-    getWordCount();
-    $('#inputWord').focus();
-    $('#inputWord').keyup(function () {
-        $('#apiPanel').hide();
-        suggestWords();
-    });
+//_elem objects for each element
+var apiPanel = new _elem('apiPanel');
+var welcomePanel = new _elem('welcomePanel');
+var list = new _elem('list');
+var listItems = new _elem('listItems');
+var listTitle = new _elem('listTitle');
+var inputWord = new _elem('inputWord');
+var wordCount = new _elem('wordCount');
+var apiBtn = new _elem('apiBtn');
+
+window.addEventListener("load", function () {
+	getWordCount();
+	document.getElementById('inputWord').focus();
+
+	//call suggest words on keyup
+	inputWord.getElem().addEventListener('keyup', function () {
+		apiPanel.hide();
+		suggestWords();
+	});
 });
 
+//suggest words
 function suggestWords() {
-    //suggest words on key up
 
-    var inputWord = $('#inputWord').val().trim();
-    if (!isEmpty(inputWord)) {
-        $('#listTitle').text("Suggestions");
+	let input = inputWord.getInputText().trim();
 
-        //send get request & get words (0 response = null)
-        $.get('./suggest.php?s=' + inputWord, function (data) {
-            if (data !== '0') {
-                addToList(inputWord, data, 'suggest');
-                $('#welcomePanel').hide();
-                $('#list').fadeIn();
+	if (!isEmpty(input)) {
 
-            } else {
-                $("#listItems").empty();
-                $("#listItems").append('<a href="#" class="list-group-item sinhala">' + "Sorry!. '" + inputWord + "' is not included in our database at the moment." + '</a>');
-            }
-        });
-    } else {
-        $('#list').hide();
-        $('#welcomePanel').fadeIn();
-    }
+		listTitle.setText("Suggestions");
+
+		//send get request & get words (0 response = null)
+		fetch('./suggest.php?s=' + input)
+			.then(function (response) {
+				return response.text();
+			})
+
+			.then(function (data) {
+				if (data !== '0') {
+					addToList(data, 'suggest');
+					welcomePanel.hide();
+					list.fadeIn();
+				} else {
+					listItems.empty();
+					listItems.append('<a href="#" class="list-group-item sinhala">' + "Sorry!. '" + input + "' is not included in our database at the moment." + '</a>', 'beforeend')
+				}
+			});
+
+	} else {
+		list.hide();
+		welcomePanel.fadeIn();
+	}
 
 }
 
-function findMeaning(inputWord) {
-    $('#listTitle').text("Definitions");
-    $('#inputWord').val(inputWord);
-    //send get request & get meanings
-    $.get('./find.php?s=' + inputWord, function (data) {
-        addToList(inputWord, data, 'meaning');
-    });
+//find meaning of a given word
+function findMeaning(input) {
+	listTitle.setText("Definitions");
+	inputWord.setInputText(input);
+
+	//send get request & get meanings
+	fetch('./find.php?s=' + input)
+		.then(function (response) {
+			return response.text();
+		})
+
+		.then(function (data) {
+			addToList(data, 'meaning');
+		});
+
+
 }
 
-function addToList(inputWord, data, type) {
-    //add meanings to div
-    $("#listItems").empty();
-    var jsonData = JSON.parse(data);
-    for (item in jsonData) {
-        if (type == 'suggest') {
-            $("#listItems").append('<a href="#" onclick="findMeaning(' + "'" + jsonData[item] + "'" + ')" class="list-group-item sinhala">' + jsonData[item] + '</a>');
-        } else {
-            $("#listItems").append('<a href="#" class="list-group-item sinhala">' + jsonData[item] + '</a>');
-        }
-    }
+//add items to listItems div
+function addToList(data, type) {
+	listItems.empty();
+	var jsonData = JSON.parse(data);
+
+	for (item in jsonData) {
+		if (type == 'suggest') {
+			listItems.append('<a href="#" onclick="findMeaning(' + "'" + jsonData[item] + "'" + ')" class="list-group-item sinhala">' + jsonData[item] + '</a>', 'beforeend');
+		} else {
+			listItems.append('<a href="#" class="list-group-item sinhala">' + jsonData[item] + '</a>', 'beforeend');
+		}
+	}
 }
 
+//request word count
 function getWordCount() {
-    $.get('./count.php', function (data) {
-        $('#wordCount').text(data);
-    });
+	fetch('./count.php')
+		.then(function (response) {
+			return response.text();
+		})
+
+		.then(function (data) {
+			wordCount.setText(data);
+		});
 }
 
+//check null or empty
 function isEmpty(val) {
-    //check if input null or empty
-    if (val !== null && val !== '') {
-        return false;
-    } else {
-        return true;
-    }
+	if (val !== null && val !== '') {
+		return false;
+	} else {
+		return true;
+	}
 }
 
-$('#apiBtn').click(function() {
-    $('#list').hide();
-    $('#welcomePanel').hide();
-    $('#apiPanel').fadeIn();
-}); 
+//api button (hyperlink) on click
+apiBtn.getElem().addEventListener('click', function() {
+	list.hide();
+	welcomePanel.hide();
+	apiPanel.fadeIn();
+});
+
+
+//_elem to use on elements (alter elements)
+function _elem(id) {
+	this.elem = document.getElementById(id);
+	var el = this.elem;
+
+	this.getElem = function() {
+		return(el);
+	}
+
+	this.fadeIn = function () {
+
+		el.style.opacity = 0;
+		el.style.display = "block";
+
+		(function fade() {
+			var val = parseFloat(el.style.opacity);
+			if (!((val += .1) > 1)) {
+				el.style.opacity = val;
+				setTimeout(fade, 40);
+			}
+		})();
+	}
+
+	this.fadeOut = function () {
+		el.style.opacity = 1;
+		(function fade() {
+			if ((el.style.opacity -= .1) < 0) {
+				el.style.display = "none";
+			} else {
+				setTimeout(fade, 40);
+			}
+		})();
+	}
+
+	this.hide = function () {
+		el.style.display = "none";
+	}
+
+	this.empty = function () {
+		el.innerHTML = " ";
+	}
+
+	this.append = function (val, pos) {
+		el.insertAdjacentHTML(pos, val);
+	}
+
+	this.setText = function (val) {
+		el.innerHTML = val;
+	}
+
+	this.getInputText = function () {
+		return (el.value);
+	}
+
+	this.setInputText = function (val) {
+		el.value = val;
+	}
+}
